@@ -11,3 +11,11 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+/banana-stock-manager/nbproject/private/
+/banana-stock-manager/build/
+/banana-stock-manager/nbbuild/
+/banana-stock-manager/dist/
+/banana-stock-manager/nbdist/
+/banana-stock-manager/nbactions.xml
+/banana-stock-manager/.nb-gradle/
