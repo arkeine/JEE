@@ -19,3 +19,5 @@ hs_err_pid*
 /banana-stock-manager/nbdist/
 /banana-stock-manager/nbactions.xml
 /banana-stock-manager/.nb-gradle/
+/jpaproject/nbproject/private/
+/jpaproject/build/
