@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPackageTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPackageLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{packageController.selected.id}" title="#{bundle.EditPackageTitle_id}" required="true" requiredMessage="#{bundle.EditPackageRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditPackageLabel_gatherdate}" for="gatherdate" />
+                    <h:inputText id="gatherdate" value="#{packageController.selected.gatherdate}" title="#{bundle.EditPackageTitle_gatherdate}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditPackageLabel_productor}" for="productor" />
+                    <h:inputText id="productor" value="#{packageController.selected.productor}" title="#{bundle.EditPackageTitle_productor}" required="true" requiredMessage="#{bundle.EditPackageRequiredMessage_productor}"/>
+                    <h:outputLabel value="#{bundle.EditPackageLabel_hangar}" for="hangar" />
+                    <h:inputText id="hangar" value="#{packageController.selected.hangar}" title="#{bundle.EditPackageTitle_hangar}" required="true" requiredMessage="#{bundle.EditPackageRequiredMessage_hangar}"/>
+                    <h:outputLabel value="#{bundle.EditPackageLabel_client}" for="client" />
+                    <h:inputText id="client" value="#{packageController.selected.client}" title="#{bundle.EditPackageTitle_client}" required="true" requiredMessage="#{bundle.EditPackageRequiredMessage_client}"/>
+                    <h:outputLabel value="#{bundle.EditPackageLabel_isTransit}" for="isTransit" />
+                    <h:inputText id="isTransit" value="#{packageController.selected.isTransit}" title="#{bundle.EditPackageTitle_isTransit}" required="true" requiredMessage="#{bundle.EditPackageRequiredMessage_isTransit}"/>
+                    <h:outputLabel value="#{bundle.EditPackageLabel_bananatypeid}" for="bananatypeid" />
+                    <h:selectOneMenu id="bananatypeid" value="#{packageController.selected.bananatypeid}" title="#{bundle.EditPackageTitle_bananatypeid}" required="true" requiredMessage="#{bundle.EditPackageRequiredMessage_bananatypeid}">
+                        <f:selectItems value="#{bananatypeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{packageController.update}" value="#{bundle.EditPackageSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPackageViewLink}"/>
+                <br />
+                <h:commandLink action="#{packageController.prepareList}" value="#{bundle.EditPackageShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditPackageIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

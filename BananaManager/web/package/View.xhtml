@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPackageTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPackageLabel_id}"/>
+                    <h:outputText value="#{packageController.selected.id}" title="#{bundle.ViewPackageTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewPackageLabel_gatherdate}"/>
+                    <h:outputText value="#{packageController.selected.gatherdate}" title="#{bundle.ViewPackageTitle_gatherdate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewPackageLabel_productor}"/>
+                    <h:outputText value="#{packageController.selected.productor}" title="#{bundle.ViewPackageTitle_productor}"/>
+                    <h:outputText value="#{bundle.ViewPackageLabel_hangar}"/>
+                    <h:outputText value="#{packageController.selected.hangar}" title="#{bundle.ViewPackageTitle_hangar}"/>
+                    <h:outputText value="#{bundle.ViewPackageLabel_client}"/>
+                    <h:outputText value="#{packageController.selected.client}" title="#{bundle.ViewPackageTitle_client}"/>
+                    <h:outputText value="#{bundle.ViewPackageLabel_isTransit}"/>
+                    <h:outputText value="#{packageController.selected.isTransit}" title="#{bundle.ViewPackageTitle_isTransit}"/>
+                    <h:outputText value="#{bundle.ViewPackageLabel_bananatypeid}"/>
+                    <h:outputText value="#{packageController.selected.bananatypeid}" title="#{bundle.ViewPackageTitle_bananatypeid}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{packageController.destroyAndView}" value="#{bundle.ViewPackageDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPackageEditLink}"/>
+                <br />
+                <h:commandLink action="#{packageController.prepareCreate}" value="#{bundle.ViewPackageCreateLink}" />
+                <br />
+                <h:commandLink action="#{packageController.prepareList}" value="#{bundle.ViewPackageShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPackageIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
