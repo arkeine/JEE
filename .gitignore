@@ -22,3 +22,10 @@ hs_err_pid*
 /banana-stock-manager/.nb-gradle/
 /jpaproject/nbproject/private/
 /jpaproject/build/
+/Banana-Manager/target/
+/WebApplication1/nbproject/private/
+/WebApplication1/dist/
+/WebApplication1/build/
+/BananaManager/nbproject/private/
+/BananaManager/dist/
+/BananaManager/build/
