@@ -6,7 +6,7 @@
     <ui:composition template="/template.xhtml">
         <ui:define name="title">Banana login</ui:define>
         <ui:define name="content">
-            <form name="loginForm" method="POST" action="j_security_check">
+            <!--<form name="loginForm" method="POST" action="j_security_check">
             <p><strong>Please type your banana name: </strong>
                 <input type="text" name="j_username" size="25" /></p>
             <p><strong>Please type your banana password: </strong>
@@ -15,7 +15,38 @@
                 <input type="submit" value="Submit"/>
                 <input type="reset" value="Reset"/>
             </p>
-            </form>
+            </form>-->			
+  <div class="row">
+    <div class="col-md-5 col-md-offset-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong class="">Login</strong>
+        </div>
+        <div class="panel-body">
+          <form class="form-horizontal" role="form" rendered="true" name="loginForm" method="POST" action="j_security_check">
+            <div class="form-group">
+              <label for="username" class="col-sm-5 control-label">Banana Name:</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="username" placeholder="Enter username" name="j_username"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="pwd" class="col-sm-5 control-label">Pass Banana:</label>
+              <div class="col-sm-6">
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="j_password"/>
+              </div>
+            </div>
+            <div class="form-group last">
+              <div class="col-sm-offset-5 col-sm-9">
+              	<input type="submit" class="btn btn-default" id="submit" value="Submit"/>
+                <input type="reset" class="btn btn-default" value="Reset"/>
+              </div>
+            </div>			
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
         </ui:define>
     </ui:composition>
 </html>
