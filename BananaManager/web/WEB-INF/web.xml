@@ -11,7 +11,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>BananaManager</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -19,14 +19,14 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     <security-constraint>
         <display-name>administration zone</display-name>
         <web-resource-collection>
             <web-resource-name>AdminPages</web-resource-name>
             <description>Only administrator are allowed to see this page</description>
-            <url-pattern>/faces/admin/*</url-pattern>
+            <url-pattern>/admin/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description>These are the roles who have access</description>
@@ -36,8 +36,8 @@
     <login-config>
         <auth-method>FORM</auth-method>
         <form-login-config>
-            <form-login-page>/faces/login/login.xhtml</form-login-page>
-            <form-error-page>/faces/login/error.xhtml</form-error-page>
+            <form-login-page>/login/login.xhtml</form-login-page>
+            <form-error-page>/login/error.xhtml</form-error-page>
         </form-login-config>
     </login-config>
     <security-role>
