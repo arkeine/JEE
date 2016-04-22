@@ -1,9 +1,9 @@
-package facades;
+package controllers;
 
-import entites.Stock;
+import entites.Command;
 import facades.util.JsfUtil;
 import facades.util.PaginationHelper;
-import controllers.StockFacade;
+import facades.CommandFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,29 +18,29 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@ManagedBean(name = "stockController")
+@ManagedBean(name = "commandController")
 @SessionScoped
-public class StockController implements Serializable {
+public class CommandController implements Serializable {
 
-    private Stock current;
+    private Command current;
     private DataModel items = null;
     @EJB
-    private controllers.StockFacade ejbFacade;
+    private facades.CommandFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public StockController() {
+    public CommandController() {
     }
 
-    public Stock getSelected() {
+    public Command getSelected() {
         if (current == null) {
-            current = new Stock();
+            current = new Command();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private StockFacade getFacade() {
+    private CommandFacade getFacade() {
         return ejbFacade;
     }
 
@@ -68,13 +68,13 @@ public class StockController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Stock) getItems().getRowData();
+        current = (Command) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Stock();
+        current = new Command();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -82,7 +82,7 @@ public class StockController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("StockCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CommandCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -91,7 +91,7 @@ public class StockController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Stock) getItems().getRowData();
+        current = (Command) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -99,7 +99,7 @@ public class StockController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("StockUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CommandUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -108,7 +108,7 @@ public class StockController implements Serializable {
     }
 
     public String destroy() {
-        current = (Stock) getItems().getRowData();
+        current = (Command) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -132,7 +132,7 @@ public class StockController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("StockDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CommandDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -188,16 +188,16 @@ public class StockController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass = Stock.class)
-    public static class StockControllerConverter implements Converter {
+    @FacesConverter(forClass = Command.class)
+    public static class CommandControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            StockController controller = (StockController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "stockController");
+            CommandController controller = (CommandController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "commandController");
             return controller.ejbFacade.find(getKey(value));
         }
 
@@ -218,11 +218,11 @@ public class StockController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Stock) {
-                Stock o = (Stock) object;
+            if (object instanceof Command) {
+                Command o = (Command) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Stock.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Command.class.getName());
             }
         }
 

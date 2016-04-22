@@ -1,9 +1,9 @@
-package facades;
+package controllers;
 
-import entites.User;
+import entites.Stock;
 import facades.util.JsfUtil;
 import facades.util.PaginationHelper;
-import controllers.UserFacade;
+import facades.StockFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,29 +18,29 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@ManagedBean(name = "userController")
+@ManagedBean(name = "stockController")
 @SessionScoped
-public class UserController implements Serializable {
+public class StockController implements Serializable {
 
-    private User current;
+    private Stock current;
     private DataModel items = null;
     @EJB
-    private controllers.UserFacade ejbFacade;
+    private facades.StockFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public UserController() {
+    public StockController() {
     }
 
-    public User getSelected() {
+    public Stock getSelected() {
         if (current == null) {
-            current = new User();
+            current = new Stock();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private UserFacade getFacade() {
+    private StockFacade getFacade() {
         return ejbFacade;
     }
 
@@ -68,13 +68,13 @@ public class UserController implements Serializable {
     }
 
     public String prepareView() {
-        current = (User) getItems().getRowData();
+        current = (Stock) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new User();
+        current = new Stock();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -82,7 +82,7 @@ public class UserController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("StockCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -91,7 +91,7 @@ public class UserController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (User) getItems().getRowData();
+        current = (Stock) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -99,7 +99,7 @@ public class UserController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("StockUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -108,7 +108,7 @@ public class UserController implements Serializable {
     }
 
     public String destroy() {
-        current = (User) getItems().getRowData();
+        current = (Stock) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -132,7 +132,7 @@ public class UserController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("StockDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -188,16 +188,16 @@ public class UserController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass = User.class)
-    public static class UserControllerConverter implements Converter {
+    @FacesConverter(forClass = Stock.class)
+    public static class StockControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            UserController controller = (UserController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "userController");
+            StockController controller = (StockController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "stockController");
             return controller.ejbFacade.find(getKey(value));
         }
 
@@ -218,11 +218,11 @@ public class UserController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof User) {
-                User o = (User) object;
+            if (object instanceof Stock) {
+                Stock o = (Stock) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + User.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Stock.class.getName());
             }
         }
 

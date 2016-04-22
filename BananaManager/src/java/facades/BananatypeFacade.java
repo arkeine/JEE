@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package facades;
 
-import entites.Address;
+import entites.Bananatype;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author arkeine
  */
 @Stateless
-public class AddressFacade extends AbstractFacade<Address> {
+public class BananatypeFacade extends AbstractFacade<Bananatype> {
     @PersistenceContext(unitName = "BananaManagerPU")
     private EntityManager em;
 
@@ -24,8 +24,8 @@ public class AddressFacade extends AbstractFacade<Address> {
         return em;
     }
 
-    public AddressFacade() {
-        super(Address.class);
+    public BananatypeFacade() {
+        super(Bananatype.class);
     }
     
 }

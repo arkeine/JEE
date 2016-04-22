@@ -26,9 +26,7 @@
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
                     <h:outputLabel value="#{bundle.CreateCommandLabel_userid}" for="userid" />
-                    <h:selectOneMenu id="userid" value="#{commandController.selected.userid}" title="#{bundle.CreateCommandTitle_userid}" required="true" requiredMessage="#{bundle.CreateCommandRequiredMessage_userid}">
-                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                    <h:inputText id="userid" value="#{commandController.selected.userid}" title="#{bundle.CreateCommandTitle_userid}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{commandController.create}" value="#{bundle.CreateCommandSaveLink}" />

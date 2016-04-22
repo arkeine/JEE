@@ -1,9 +1,9 @@
-package facades;
+package controllers;
 
-import entites.Role;
+import entites.Address;
 import facades.util.JsfUtil;
 import facades.util.PaginationHelper;
-import controllers.RoleFacade;
+import facades.AddressFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,29 +18,29 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@ManagedBean(name = "roleController")
+@ManagedBean(name = "addressController")
 @SessionScoped
-public class RoleController implements Serializable {
+public class AddressController implements Serializable {
 
-    private Role current;
+    private Address current;
     private DataModel items = null;
     @EJB
-    private controllers.RoleFacade ejbFacade;
+    private facades.AddressFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public RoleController() {
+    public AddressController() {
     }
 
-    public Role getSelected() {
+    public Address getSelected() {
         if (current == null) {
-            current = new Role();
+            current = new Address();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private RoleFacade getFacade() {
+    private AddressFacade getFacade() {
         return ejbFacade;
     }
 
@@ -68,13 +68,13 @@ public class RoleController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Role) getItems().getRowData();
+        current = (Address) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Role();
+        current = new Address();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -82,7 +82,7 @@ public class RoleController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RoleCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AddressCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -91,7 +91,7 @@ public class RoleController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Role) getItems().getRowData();
+        current = (Address) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -99,7 +99,7 @@ public class RoleController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RoleUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AddressUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -108,7 +108,7 @@ public class RoleController implements Serializable {
     }
 
     public String destroy() {
-        current = (Role) getItems().getRowData();
+        current = (Address) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -132,7 +132,7 @@ public class RoleController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RoleDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AddressDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -188,16 +188,16 @@ public class RoleController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass = Role.class)
-    public static class RoleControllerConverter implements Converter {
+    @FacesConverter(forClass = Address.class)
+    public static class AddressControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            RoleController controller = (RoleController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "roleController");
+            AddressController controller = (AddressController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "addressController");
             return controller.ejbFacade.find(getKey(value));
         }
 
@@ -218,11 +218,11 @@ public class RoleController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Role) {
-                Role o = (Role) object;
+            if (object instanceof Address) {
+                Address o = (Address) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Role.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Address.class.getName());
             }
         }
 

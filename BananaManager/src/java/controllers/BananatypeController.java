@@ -1,9 +1,9 @@
-package facades;
+package controllers;
 
-import entites.Address;
+import entites.Bananatype;
 import facades.util.JsfUtil;
 import facades.util.PaginationHelper;
-import controllers.AddressFacade;
+import facades.BananatypeFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,29 +18,29 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@ManagedBean(name = "addressController")
+@ManagedBean(name = "bananatypeController")
 @SessionScoped
-public class AddressController implements Serializable {
+public class BananatypeController implements Serializable {
 
-    private Address current;
+    private Bananatype current;
     private DataModel items = null;
     @EJB
-    private controllers.AddressFacade ejbFacade;
+    private facades.BananatypeFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public AddressController() {
+    public BananatypeController() {
     }
 
-    public Address getSelected() {
+    public Bananatype getSelected() {
         if (current == null) {
-            current = new Address();
+            current = new Bananatype();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private AddressFacade getFacade() {
+    private BananatypeFacade getFacade() {
         return ejbFacade;
     }
 
@@ -68,13 +68,13 @@ public class AddressController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Address) getItems().getRowData();
+        current = (Bananatype) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Address();
+        current = new Bananatype();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -82,7 +82,7 @@ public class AddressController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AddressCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BananatypeCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -91,7 +91,7 @@ public class AddressController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Address) getItems().getRowData();
+        current = (Bananatype) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -99,7 +99,7 @@ public class AddressController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AddressUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BananatypeUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -108,7 +108,7 @@ public class AddressController implements Serializable {
     }
 
     public String destroy() {
-        current = (Address) getItems().getRowData();
+        current = (Bananatype) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -132,7 +132,7 @@ public class AddressController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AddressDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BananatypeDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -188,16 +188,16 @@ public class AddressController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass = Address.class)
-    public static class AddressControllerConverter implements Converter {
+    @FacesConverter(forClass = Bananatype.class)
+    public static class BananatypeControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            AddressController controller = (AddressController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "addressController");
+            BananatypeController controller = (BananatypeController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "bananatypeController");
             return controller.ejbFacade.find(getKey(value));
         }
 
@@ -218,11 +218,11 @@ public class AddressController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Address) {
-                Address o = (Address) object;
+            if (object instanceof Bananatype) {
+                Bananatype o = (Bananatype) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Address.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Bananatype.class.getName());
             }
         }
 

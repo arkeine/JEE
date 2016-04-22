@@ -12,7 +12,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -35,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Stock.findById", query = "SELECT s FROM Stock s WHERE s.id = :id"),
     @NamedQuery(name = "Stock.findByLabel", query = "SELECT s FROM Stock s WHERE s.label = :label"),
     @NamedQuery(name = "Stock.findByCapacityMax", query = "SELECT s FROM Stock s WHERE s.capacityMax = :capacityMax"),
-    @NamedQuery(name = "Stock.findByCapacityCurrent", query = "SELECT s FROM Stock s WHERE s.capacityCurrent = :capacityCurrent")})
+    @NamedQuery(name = "Stock.findByCapacityCurrent", query = "SELECT s FROM Stock s WHERE s.capacityCurrent = :capacityCurrent"),
+    @NamedQuery(name = "Stock.findByUserid", query = "SELECT s FROM Stock s WHERE s.userid = :userid")})
 public class Stock implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,11 +50,9 @@ public class Stock implements Serializable {
     private Integer capacityMax;
     @Column(name = "capacity_current")
     private Integer capacityCurrent;
-    @JoinTable(name = "User_has_Stock", joinColumns = {
-        @JoinColumn(name = "Stock_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "User_id", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<User> userCollection;
+    @Size(max = 45)
+    @Column(name = "User_id")
+    private String userid;
     @ManyToMany(mappedBy = "stockCollection")
     private Collection<Package> packageCollection;
     @JoinColumn(name = "Address_id", referencedColumnName = "id")
@@ -100,13 +98,12 @@ public class Stock implements Serializable {
         this.capacityCurrent = capacityCurrent;
     }
 
-    @XmlTransient
-    public Collection<User> getUserCollection() {
-        return userCollection;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setUserCollection(Collection<User> userCollection) {
-        this.userCollection = userCollection;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     @XmlTransient

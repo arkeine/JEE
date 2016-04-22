@@ -15,13 +15,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Command.findAll", query = "SELECT c FROM Command c"),
     @NamedQuery(name = "Command.findById", query = "SELECT c FROM Command c WHERE c.id = :id"),
     @NamedQuery(name = "Command.findByDateOrder", query = "SELECT c FROM Command c WHERE c.dateOrder = :dateOrder"),
-    @NamedQuery(name = "Command.findByDatePayement", query = "SELECT c FROM Command c WHERE c.datePayement = :datePayement")})
+    @NamedQuery(name = "Command.findByDatePayement", query = "SELECT c FROM Command c WHERE c.datePayement = :datePayement"),
+    @NamedQuery(name = "Command.findByUserid", query = "SELECT c FROM Command c WHERE c.userid = :userid")})
 public class Command implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,14 +51,14 @@ public class Command implements Serializable {
     @Column(name = "date_payement")
     @Temporal(TemporalType.DATE)
     private Date datePayement;
+    @Size(max = 45)
+    @Column(name = "User_id")
+    private String userid;
     @JoinTable(name = "Command_has_Package", joinColumns = {
         @JoinColumn(name = "Command_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "Package_id", referencedColumnName = "id")})
     @ManyToMany
     private Collection<Package> packageCollection;
-    @JoinColumn(name = "User_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private User userid;
 
     public Command() {
     }
@@ -90,6 +91,14 @@ public class Command implements Serializable {
         this.datePayement = datePayement;
     }
 
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
     @XmlTransient
     public Collection<Package> getPackageCollection() {
         return packageCollection;
@@ -97,14 +106,6 @@ public class Command implements Serializable {
 
     public void setPackageCollection(Collection<Package> packageCollection) {
         this.packageCollection = packageCollection;
-    }
-
-    public User getUserid() {
-        return userid;
-    }
-
-    public void setUserid(User userid) {
-        this.userid = userid;
     }
 
     @Override

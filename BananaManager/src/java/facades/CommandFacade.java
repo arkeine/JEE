@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package facades;
 
-import entites.Stock;
+import entites.Command;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author arkeine
  */
 @Stateless
-public class StockFacade extends AbstractFacade<Stock> {
+public class CommandFacade extends AbstractFacade<Command> {
     @PersistenceContext(unitName = "BananaManagerPU")
     private EntityManager em;
 
@@ -24,8 +24,8 @@ public class StockFacade extends AbstractFacade<Stock> {
         return em;
     }
 
-    public StockFacade() {
-        super(Stock.class);
+    public CommandFacade() {
+        super(Command.class);
     }
     
 }

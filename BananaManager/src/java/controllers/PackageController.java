@@ -1,9 +1,9 @@
-package facades;
+package controllers;
 
-import entites.Bananatype;
+import entites.Package;
 import facades.util.JsfUtil;
 import facades.util.PaginationHelper;
-import controllers.BananatypeFacade;
+import facades.PackageFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,29 +18,29 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@ManagedBean(name = "bananatypeController")
+@ManagedBean(name = "packageController")
 @SessionScoped
-public class BananatypeController implements Serializable {
+public class PackageController implements Serializable {
 
-    private Bananatype current;
+    private Package current;
     private DataModel items = null;
     @EJB
-    private controllers.BananatypeFacade ejbFacade;
+    private facades.PackageFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public BananatypeController() {
+    public PackageController() {
     }
 
-    public Bananatype getSelected() {
+    public Package getSelected() {
         if (current == null) {
-            current = new Bananatype();
+            current = new Package();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private BananatypeFacade getFacade() {
+    private PackageFacade getFacade() {
         return ejbFacade;
     }
 
@@ -68,13 +68,13 @@ public class BananatypeController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Bananatype) getItems().getRowData();
+        current = (Package) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Bananatype();
+        current = new Package();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -82,7 +82,7 @@ public class BananatypeController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BananatypeCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PackageCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -91,7 +91,7 @@ public class BananatypeController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Bananatype) getItems().getRowData();
+        current = (Package) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -99,7 +99,7 @@ public class BananatypeController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BananatypeUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PackageUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -108,7 +108,7 @@ public class BananatypeController implements Serializable {
     }
 
     public String destroy() {
-        current = (Bananatype) getItems().getRowData();
+        current = (Package) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -132,7 +132,7 @@ public class BananatypeController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BananatypeDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PackageDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -188,16 +188,16 @@ public class BananatypeController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass = Bananatype.class)
-    public static class BananatypeControllerConverter implements Converter {
+    @FacesConverter(forClass = Package.class)
+    public static class PackageControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            BananatypeController controller = (BananatypeController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "bananatypeController");
+            PackageController controller = (PackageController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "packageController");
             return controller.ejbFacade.find(getKey(value));
         }
 
@@ -218,11 +218,11 @@ public class BananatypeController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Bananatype) {
-                Bananatype o = (Bananatype) object;
+            if (object instanceof Package) {
+                Package o = (Package) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Bananatype.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Package.class.getName());
             }
         }
 
