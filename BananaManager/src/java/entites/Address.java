@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Address.findByNpa", query = "SELECT a FROM Address a WHERE a.npa = :npa"),
     @NamedQuery(name = "Address.findByTown", query = "SELECT a FROM Address a WHERE a.town = :town"),
     @NamedQuery(name = "Address.findByCountry", query = "SELECT a FROM Address a WHERE a.country = :country"),
-    @NamedQuery(name = "Address.findByDistric", query = "SELECT a FROM Address a WHERE a.distric = :distric")})
+    @NamedQuery(name = "Address.findByDistric", query = "SELECT a FROM Address a WHERE a.distric = :distric"),
+    @NamedQuery(name = "Address.findByUserid", query = "SELECT a FROM Address a WHERE a.userid = :userid")})
 public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,8 +63,9 @@ public class Address implements Serializable {
     @Size(max = 45)
     @Column(name = "distric")
     private String distric;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressid")
-    private Collection<User> userCollection;
+    @Size(max = 45)
+    @Column(name = "User_id")
+    private String userid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressid")
     private Collection<Stock> stockCollection;
 
@@ -130,13 +132,12 @@ public class Address implements Serializable {
         this.distric = distric;
     }
 
-    @XmlTransient
-    public Collection<User> getUserCollection() {
-        return userCollection;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setUserCollection(Collection<User> userCollection) {
-        this.userCollection = userCollection;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     @XmlTransient

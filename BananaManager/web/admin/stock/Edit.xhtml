@@ -23,6 +23,8 @@
                     <h:inputText id="capacityMax" value="#{stockController.selected.capacityMax}" title="#{bundle.EditStockTitle_capacityMax}" />
                     <h:outputLabel value="#{bundle.EditStockLabel_capacityCurrent}" for="capacityCurrent" />
                     <h:inputText id="capacityCurrent" value="#{stockController.selected.capacityCurrent}" title="#{bundle.EditStockTitle_capacityCurrent}" />
+                    <h:outputLabel value="#{bundle.EditStockLabel_userid}" for="userid" />
+                    <h:inputText id="userid" value="#{stockController.selected.userid}" title="#{bundle.EditStockTitle_userid}" />
                     <h:outputLabel value="#{bundle.EditStockLabel_addressid}" for="addressid" />
                     <h:selectOneMenu id="addressid" value="#{stockController.selected.addressid}" title="#{bundle.EditStockTitle_addressid}" required="true" requiredMessage="#{bundle.EditStockRequiredMessage_addressid}">
                         <f:selectItems value="#{addressController.itemsAvailableSelectOne}"/>

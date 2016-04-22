@@ -29,6 +29,8 @@
                     <h:inputText id="country" value="#{addressController.selected.country}" title="#{bundle.CreateAddressTitle_country}" />
                     <h:outputLabel value="#{bundle.CreateAddressLabel_distric}" for="distric" />
                     <h:inputText id="distric" value="#{addressController.selected.distric}" title="#{bundle.CreateAddressTitle_distric}" />
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_userid}" for="userid" />
+                    <h:inputText id="userid" value="#{addressController.selected.userid}" title="#{bundle.CreateAddressTitle_userid}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{addressController.create}" value="#{bundle.CreateAddressSaveLink}" />
