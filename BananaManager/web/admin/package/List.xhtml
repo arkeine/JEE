@@ -10,8 +10,14 @@
             <h:outputText value="#{bundle.ListPackageTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            <script>
+            setTimeout(function doSomethingLater() {
+                document.getElementById("menu_package_list").className += " active";
+            }, 5);
+            </script>
             <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
+                
+                <h:panelGroup class="alert" id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
                 <h:outputText escape="false" value="#{bundle.ListPackageEmpty}" rendered="#{packageController.items.rowCount == 0}"/>

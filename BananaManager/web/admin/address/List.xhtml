@@ -10,7 +10,13 @@
             <h:outputText value="#{bundle.ListAddressTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            <script>
+            setTimeout(function doSomethingLater() {
+                document.getElementById("menu_address_list").className += " active";
+            }, 5);
+            </script>
             <h:form styleClass="jsfcrud_list_form">
+                
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
