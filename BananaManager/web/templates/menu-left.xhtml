@@ -16,16 +16,16 @@ and open the template in the editor.
 
         <ul class="nav nav-sidebar">
             <hr></hr>
-            <li id="menu_dashboard"><a href="/BananaManager">Dashboard</a></li>
+            <li id="menu_dashboard"><a href="/BananaManager/index.xhtml">Dashboard</a></li>
             <li id="menu_reports"><a href="#">Reports</a></li>
             <li id="menu_analytics"><a href="#">Analytics</a></li>
             <hr></hr>
-            <li id="menu_stock_list"><a href="/BananaManager/admin/stock/List">Show Stocks</a></li>
-            <li id="menu_package_list"><a href="/BananaManager/admin/package/List">Show Packages</a></li>
-            <li id="menu_command_list"><a href="/BananaManager/admin/command/List">Show Commands</a></li>
-            <li id="menu_bananatype_list"><a href="/BananaManager/bananatype/List">Show Banana Types</a></li>
+            <li id="menu_stock_list"><h:link outcome="/admin/stock/List" value="Show All Stock Items"/></li>
+            <li id="menu_package_list"><h:link outcome="/admin/package/List" value="Show All Package Items"/></li>
+            <li id="menu_command_list"><h:link outcome="/admin/command/List" value="Show All Command Items"/></li>
+            <li id="menu_bananatype_list"><h:link outcome="/bananatype/List" value="Show All Bananatype Items"/></li>
             <hr></hr>
-            <li id="menu_address_list"><a href="/BananaManager/admin/address/List">Show Addresses</a></li>
+            <li id="menu_address_list"><h:link outcome="/admin/address/List" value="Show All Address Items"/></li>
             <hr></hr>
         </ul>
     </ui:composition>
