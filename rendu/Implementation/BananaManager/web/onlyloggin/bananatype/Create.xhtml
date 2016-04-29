@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateBananatypeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <script>
+                setTimeout(function doSomethingLater() {
+                    document.getElementById("menu_bananatype_list").className += " active";
+                }, 5);
+            </script>
+            <div class="panel-heading">Create BananaType</div>
+            <div class="panel-body">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:form>
+                    <h:commandLink class="btn btn-sm btn-primary" action="#{bananatypeController.create}" value="#{bundle.CreateBananatypeSaveLink}"/>
+                    <h:commandLink class="btn btn-sm btn-default" action="#{bananatypeController.prepareList}" value="#{bundle.CreateBananatypeShowAllLink}" immediate="true"/>
+                    <h:link class="btn btn-sm btn-info" outcome="/index" value="#{bundle.CreateBananatypeIndexLink}"/>
+                    <br/><br/>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h:panelGrid class="table" columns="2">
+                                <h:outputLabel value="#{bundle.CreateBananatypeLabel_label}" for="label" />
+                                <h:inputText id="label" value="#{bananatypeController.selected.label}" title="#{bundle.CreateBananatypeTitle_label}" required="true" requiredMessage="#{bundle.CreateBananatypeRequiredMessage_label}"/>
+                            </h:panelGrid>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</html>

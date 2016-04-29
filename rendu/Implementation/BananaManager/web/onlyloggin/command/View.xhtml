@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCommandTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <script>
+            setTimeout(function doSomethingLater() {
+                document.getElementById("menu_command_list").className += " active";
+            }, 5);
+            </script>
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCommandLabel_id}"/>
+                    <h:outputText value="#{commandController.selected.id}" title="#{bundle.ViewCommandTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewCommandLabel_dateOrder}"/>
+                    <h:outputText value="#{commandController.selected.dateOrder}" title="#{bundle.ViewCommandTitle_dateOrder}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCommandLabel_datePayement}"/>
+                    <h:outputText value="#{commandController.selected.datePayement}" title="#{bundle.ViewCommandTitle_datePayement}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCommandLabel_userid}"/>
+                    <h:outputText value="#{commandController.selected.userid}" title="#{bundle.ViewCommandTitle_userid}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{commandController.destroyAndView}" value="#{bundle.ViewCommandDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCommandEditLink}"/>
+                <br />
+                <h:commandLink action="#{commandController.prepareCreate}" value="#{bundle.ViewCommandCreateLink}" />
+                <br />
+                <h:commandLink action="#{commandController.prepareList}" value="#{bundle.ViewCommandShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCommandIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

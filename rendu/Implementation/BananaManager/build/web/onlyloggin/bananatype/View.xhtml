@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewBananatypeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <script>
+                setTimeout(function doSomethingLater() {
+                    document.getElementById("menu_bananatype_list").className += " active";
+                }, 5);
+            </script>
+            <div class="panel-heading">#{bundle.ViewBananatypeTitle}: #{bananatypeController.selected.label}</div>
+            <div class="panel-body">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:form>
+                    <h:commandLink class="btn btn-sm btn-primary" action="#{bananatypeController.prepareCreate}" value="#{bundle.ViewBananatypeCreateLink}"/>
+                    <h:commandLink class="btn btn-sm btn-warning" value="#{bundle.ViewBananatypeEditLink}"/>
+                    <h:commandLink class="btn btn-sm btn-danger" action="#{bananatypeController.destroyAndView}" value="#{bundle.ViewBananatypeDestroyLink}"/>
+                    <h:commandLink class="btn btn-sm btn-default" action="#{bananatypeController.prepareList}" value="#{bundle.ViewBananatypeShowAllLink}"/>
+                    <h:link class="btn btn-sm btn-info" outcome="/index" value="#{bundle.ViewBananatypeIndexLink}"/>
+                    <br/><br/>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h:panelGrid class="table" columns="2">
+                                <h:outputText value="#{bundle.ViewBananatypeLabel_id}"/>
+                                <h:outputText value="#{bananatypeController.selected.id}" title="#{bundle.ViewBananatypeTitle_id}"/>
+                                <h:outputText value="#{bundle.ViewBananatypeLabel_label}"/>
+                                <h:outputText value="#{bananatypeController.selected.label}" title="#{bundle.ViewBananatypeTitle_label}"/>
+                            </h:panelGrid>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</html>

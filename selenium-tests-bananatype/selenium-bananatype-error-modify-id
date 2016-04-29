@@ -13,12 +13,7 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/BananaManager/bananatype/Create.xhtml</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>xpath=(//a[contains(text(),'Edit')])[4]</td>
+	<td>/BananaManager/onlyloggin/bananatype/Create.xhtml</td>
 	<td></td>
 </tr>
 <tr>

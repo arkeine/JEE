@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition>
+
+            <a class="nav nav-sidebar" href="/BananaManager/index.xhtml">
+                <h:graphicImage url="#{resource['img/logo.png']}" style="width: 100%;"></h:graphicImage>
+            </a>
+
+        <ul class="nav nav-sidebar">
+            <hr></hr>
+            <li id="menu_dashboard"><a href="/BananaManager/index.xhtml">Dashboard</a></li>
+            <li id="menu_reports"><a href="#">Reports</a></li>
+            <li id="menu_analytics"><a href="#">Analytics</a></li>
+            <hr></hr>
+            <li id="menu_stock_list"><h:link outcome="/onlyloggin/stock/List" value="Show All Stock Items"/></li>
+            <li id="menu_package_list"><h:link outcome="/onlyloggin/package/List" value="Show All Package Items"/></li>
+            <li id="menu_command_list"><h:link outcome="/onlyloggin/command/List" value="Show All Command Items"/></li>
+            <li id="menu_bananatype_list"><h:link outcome="/onlyloggin/bananatype/List" value="Show All Bananatype Items"/></li>
+            <hr></hr>
+            <li id="menu_address_list"><h:link outcome="/onlyloggin/address/List" value="Show All Address Items"/></li>
+            <hr></hr>
+        </ul>
+    </ui:composition>
+</html>
