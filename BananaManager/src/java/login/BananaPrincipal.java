@@ -3,7 +3,7 @@ package login;
 
 public class BananaPrincipal implements java.security.Principal {
     private final String name;
-    private final String role;
+    private String role = "user";
     private final int accessLevel;
 
     public String getName() {

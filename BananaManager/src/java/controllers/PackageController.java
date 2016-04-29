@@ -197,7 +197,7 @@ public class PackageController implements Serializable {
         int i = 0;
         for(Package a : listPackage)
         {
-            s[i] = new SelectItem(a.getId());
+            s[i] = new SelectItem(a, String.valueOf(a.getId()));
             i++;
         }
         return s;

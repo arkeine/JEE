@@ -81,11 +81,11 @@ public class StockController implements Serializable {
     }
 
     public String create() {
-        try {/*
+        try {
             FacesContext context = FacesContext.getCurrentInstance();
             Principal p = context.getExternalContext().getUserPrincipal();
             String name = p == null ? "":p.getName();
-            current.setUserid(name);/**/
+            current.setUserid(name);
             current.setId(0);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("StockCreated"));

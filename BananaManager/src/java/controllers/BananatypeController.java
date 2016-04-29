@@ -196,7 +196,7 @@ public class BananatypeController implements Serializable {
         int i = 0;
         for(Bananatype a : listPackage)
         {
-            s[i] = new SelectItem(a.getLabel());
+            s[i] = new SelectItem(a, a.getLabel());
             i++;
         }
         return s;
