@@ -1,0 +1,12 @@
+Structure
+
+.Documents
+---------- rapport-stategies-des-tests
+---------- rapport-specifications-test-fonctionnelles
+---------- rapport-des-tests
+---------- presentation
+
+.Implementation
+---------- BananaManager
+---------- Database
+---------- Resources
