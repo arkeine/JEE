@@ -10,23 +10,31 @@
             <h:outputText value="#{bundle.CreateBananatypeTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateBananatypeLabel_label}" for="label" />
-                    <h:inputText id="label" value="#{bananatypeController.selected.label}" title="#{bundle.CreateBananatypeTitle_label}" required="true" requiredMessage="#{bundle.CreateBananatypeRequiredMessage_label}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{bananatypeController.create}" value="#{bundle.CreateBananatypeSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{bananatypeController.prepareList}" value="#{bundle.CreateBananatypeShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateBananatypeIndexLink}"/>
-            </h:form>
+            <script>
+                setTimeout(function doSomethingLater() {
+                    document.getElementById("menu_bananatype_list").className += " active";
+                }, 5);
+            </script>
+            <div class="panel-heading">Create BananaType</div>
+            <div class="panel-body">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:form>
+                    <h:commandLink class="btn btn-sm btn-primary" action="#{bananatypeController.create}" value="#{bundle.CreateBananatypeSaveLink}"/>
+                    <h:commandLink class="btn btn-sm btn-default" action="#{bananatypeController.prepareList}" value="#{bundle.CreateBananatypeShowAllLink}" immediate="true"/>
+                    <h:link class="btn btn-sm btn-info" outcome="/index" value="#{bundle.CreateBananatypeIndexLink}"/>
+                    <br/><br/>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h:panelGrid class="table" columns="2">
+                                <h:outputLabel value="#{bundle.CreateBananatypeLabel_label}" for="label" />
+                                <h:inputText id="label" value="#{bananatypeController.selected.label}" title="#{bundle.CreateBananatypeTitle_label}" required="true" requiredMessage="#{bundle.CreateBananatypeRequiredMessage_label}"/>
+                            </h:panelGrid>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 

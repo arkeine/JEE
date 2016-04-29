@@ -10,6 +10,11 @@
             <h:outputText value="#{bundle.CreateCommandTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            <script>
+            setTimeout(function doSomethingLater() {
+                document.getElementById("menu_command_list").className += " active";
+            }, 5);
+            </script>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
@@ -23,8 +28,6 @@
                     <h:inputText id="datePayement" value="#{commandController.selected.datePayement}" title="#{bundle.CreateCommandTitle_datePayement}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateCommandLabel_userid}" for="userid" />
-                    <h:inputText id="userid" value="#{commandController.selected.userid}" title="#{bundle.CreateCommandTitle_userid}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{commandController.create}" value="#{bundle.CreateCommandSaveLink}" />

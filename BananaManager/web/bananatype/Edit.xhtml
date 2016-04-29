@@ -10,26 +10,34 @@
             <h:outputText value="#{bundle.EditBananatypeTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditBananatypeLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{bananatypeController.selected.id}" title="#{bundle.EditBananatypeTitle_id}" required="true" requiredMessage="#{bundle.EditBananatypeRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.EditBananatypeLabel_label}" for="label" />
-                    <h:inputText id="label" value="#{bananatypeController.selected.label}" title="#{bundle.EditBananatypeTitle_label}" required="true" requiredMessage="#{bundle.EditBananatypeRequiredMessage_label}"/>
-                </h:panelGrid>
-                <h:commandLink action="#{bananatypeController.update}" value="#{bundle.EditBananatypeSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditBananatypeViewLink}"/>
-                <br />
-                <h:commandLink action="#{bananatypeController.prepareList}" value="#{bundle.EditBananatypeShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditBananatypeIndexLink}" />
-            </h:form>
+            <script>
+                setTimeout(function doSomethingLater() {
+                    document.getElementById("menu_bananatype_list").className += " active";
+                }, 5);
+            </script>
+            <div class="panel-heading">#{bundle.EditBananatypeTitle}: #{bananatypeController.selected.label}</div>
+            <div class="panel-body">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:form>
+                    <h:commandLink class="btn btn-sm btn-primary" action="#{bananatypeController.update}" value="#{bundle.EditBananatypeSaveLink}"/>
+                        <h:link class="btn btn-sm btn-warning" outcome="View" value="#{bundle.EditBananatypeViewLink}"/>
+                        <h:commandLink class="btn btn-sm btn-default" action="#{bananatypeController.prepareList}" value="#{bundle.EditBananatypeShowAllLink}" immediate="true"/>
+                        <h:link class="btn btn-sm btn-info" outcome="/index" value="#{bundle.EditBananatypeIndexLink}"/>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <h:panelGrid class="table" columns="2">
+                                    <h:outputLabel value="#{bundle.EditBananatypeLabel_id}" for="id" />
+                                    <h:inputText id="id" value="#{bananatypeController.selected.id}" title="#{bundle.EditBananatypeTitle_id}" required="true" requiredMessage="#{bundle.EditBananatypeRequiredMessage_id}"/>
+                                    <h:outputLabel value="#{bundle.EditBananatypeLabel_label}" for="label" />
+                                    <h:inputText id="label" value="#{bananatypeController.selected.label}" title="#{bundle.EditBananatypeTitle_label}" required="true" requiredMessage="#{bundle.EditBananatypeRequiredMessage_label}"/>
+                                </h:panelGrid>
+                            </div>
+                        </div>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 

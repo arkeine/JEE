@@ -10,6 +10,11 @@
             <h:outputText value="#{bundle.ViewCommandTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            <script>
+            setTimeout(function doSomethingLater() {
+                document.getElementById("menu_command_list").className += " active";
+            }, 5);
+            </script>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>

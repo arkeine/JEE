@@ -10,22 +10,34 @@
             <h:outputText value="#{bundle.CreateStockTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            <script>
+            setTimeout(function doSomethingLater() {
+                document.getElementById("menu_stock_list").className += " active";
+            }, 5);
+            </script>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateStockLabel_label}" for="label" />
-                    <h:inputText id="label" value="#{stockController.selected.label}" title="#{bundle.CreateStockTitle_label}" />
-                    <h:outputLabel value="#{bundle.CreateStockLabel_capacityMax}" for="capacityMax" />
-                    <h:inputText id="capacityMax" value="#{stockController.selected.capacityMax}" title="#{bundle.CreateStockTitle_capacityMax}" />
-                    <h:outputLabel value="#{bundle.CreateStockLabel_capacityCurrent}" for="capacityCurrent" />
-                    <h:inputText id="capacityCurrent" value="#{stockController.selected.capacityCurrent}" title="#{bundle.CreateStockTitle_capacityCurrent}" />
-                    <h:outputLabel value="#{bundle.CreateStockLabel_addressid}" for="address" />
-                    <h:selectOneMenu id="addressid" value="#{stockController.selected.addressid}" title="#{bundle.CreateStockTitle_addressid}" required="true" requiredMessage="#{bundle.CreateStockRequiredMessage_addressid}">
-                        <f:selectItems value="#{addressController.itemsAvailableByName}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
+                <br/><br/>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="#{bundle.CreateStockLabel_label}" for="label" />
+                                <h:inputText id="label" value="#{stockController.selected.label}" title="#{bundle.CreateStockTitle_label}" />
+                                <h:outputLabel value="#{bundle.CreateStockLabel_capacityMax}" for="capacityMax" />
+                                <h:inputText id="capacityMax" value="#{stockController.selected.capacityMax}" title="#{bundle.CreateStockTitle_capacityMax}" />
+                                <h:outputLabel value="#{bundle.CreateStockLabel_capacityCurrent}" for="capacityCurrent" />
+                                <h:inputText id="capacityCurrent" value="#{stockController.selected.capacityCurrent}" title="#{bundle.CreateStockTitle_capacityCurrent}" />
+                                <h:outputLabel value="#{bundle.CreateStockLabel_userid}" for="userid" />
+                                <h:inputText id="userid" value="#{stockController.selected.userid}" title="#{bundle.CreateStockTitle_userid}" />
+                                <h:outputLabel value="#{bundle.CreateStockLabel_addressid}" for="addressid" />
+                                <h:selectOneMenu id="addressid" value="#{stockController.selected.addressid}" title="#{bundle.CreateStockTitle_addressid}" required="true" requiredMessage="#{bundle.CreateStockRequiredMessage_addressid}">
+                                    <f:selectItems value="#{addressController.itemsAvailableByName}"/>
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+                        </div>
+                    </div>
                 <br />
                 <h:commandLink action="#{stockController.create}" value="#{bundle.CreateStockSaveLink}" />
                 <br />

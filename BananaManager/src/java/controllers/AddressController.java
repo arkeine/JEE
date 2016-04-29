@@ -202,6 +202,7 @@ public class AddressController implements Serializable {
         for(Address a : listAddress)
         {
             s[i] = new SelectItem(a, a.getTown());
+            ++i;
         }
         return s;
     }

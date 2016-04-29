@@ -10,6 +10,11 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html">
  
     <ui:composition>
+        <script>
+            setTimeout(function doSomethingLater() {
+                document.getElementById("menu_collapse").className += " uncollapse";
+            }, 5);
+        </script>
         <div class="row">
             <div class="navbar navbar-inverse navbar-fixed-top col-md-10 col-md-offset-2" role="navigation">
                 <div class="container-fluid">
@@ -22,7 +27,7 @@ and open the template in the editor.
                         </button>
                         <!--<a class="navbar-brand" href="/BananaManager/index.xhtml">Banana Manager</a>-->
                     </div>
-                    <div class="navbar-collapse collapse">
+                    <div id="menu_collapse" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">Settings</a></li>
                             <li><a href="#">Profile</a></li>
