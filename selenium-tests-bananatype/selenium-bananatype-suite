@@ -10,7 +10,6 @@
 <tr><td><b>Test Suite</b></td></tr>
 <tr><td><a href="selenium-bananatype-showall">selenium-bananatype-showall</a></td></tr>
 <tr><td><a href="selenium-bananatype-create">selenium-bananatype-create</a></td></tr>
-<tr><td><a href="selenium-bananatype-create-error-id">selenium-bananatype-create-error-id</a></td></tr>
 <tr><td><a href="selenium-bananatype-error-create-label">selenium-bananatype-error-create-label</a></td></tr>
 <tr><td><a href="selenium-bananatype-modify">selenium-bananatype-modify</a></td></tr>
 <tr><td><a href="selenium-bananatype-error-modify-id">selenium-bananatype-error-modify-id</a></td></tr>

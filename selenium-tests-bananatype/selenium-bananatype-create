@@ -28,11 +28,6 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=j_idt32:id</td>
-	<td>9999</td>
-</tr>
-<tr>
-	<td>type</td>
 	<td>id=j_idt32:label</td>
 	<td>Selenium Banana</td>
 </tr>
