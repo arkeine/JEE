@@ -15,8 +15,6 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateCommandLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{commandController.selected.id}" title="#{bundle.CreateCommandTitle_id}" required="true" requiredMessage="#{bundle.CreateCommandRequiredMessage_id}"/>
                     <h:outputLabel value="#{bundle.CreateCommandLabel_dateOrder}" for="dateOrder" />
                     <h:inputText id="dateOrder" value="#{commandController.selected.dateOrder}" title="#{bundle.CreateCommandTitle_dateOrder}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />

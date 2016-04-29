@@ -6,6 +6,7 @@ import facades.util.PaginationHelper;
 import facades.BananatypeFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -81,6 +82,7 @@ public class BananatypeController implements Serializable {
 
     public String create() {
         try {
+            current.setId(0);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BananatypeCreated"));
             return prepareCreate();
@@ -186,6 +188,18 @@ public class BananatypeController implements Serializable {
 
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+    }
+
+    public SelectItem[] getItemsAvailableByName() {
+        List<Bananatype> listPackage = ejbFacade.findAll();
+        SelectItem[] s = new SelectItem[listPackage.size()];
+        int i = 0;
+        for(Bananatype a : listPackage)
+        {
+            s[i] = new SelectItem(a.getLabel());
+            i++;
+        }
+        return s;
     }
 
     @FacesConverter(forClass = Bananatype.class)

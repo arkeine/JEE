@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Bananatype implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @Basic(optional = true)
     @NotNull
     @Column(name = "id")
     private Integer id;

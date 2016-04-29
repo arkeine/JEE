@@ -1,11 +1,13 @@
 package controllers;
 
+import entites.Address;
 import entites.Package;
 import facades.util.JsfUtil;
 import facades.util.PaginationHelper;
 import facades.PackageFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -81,6 +83,7 @@ public class PackageController implements Serializable {
 
     public String create() {
         try {
+            current.setId(0);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PackageCreated"));
             return prepareCreate();
@@ -186,6 +189,18 @@ public class PackageController implements Serializable {
 
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+    }
+    
+    public SelectItem[] getItemsAvailableByName() {
+        List<Package> listPackage = ejbFacade.findAll();
+        SelectItem[] s = new SelectItem[listPackage.size()];
+        int i = 0;
+        for(Package a : listPackage)
+        {
+            s[i] = new SelectItem(a.getId());
+            i++;
+        }
+        return s;
     }
 
     @FacesConverter(forClass = Package.class)

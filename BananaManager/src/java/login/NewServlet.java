@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author arkeine
  */
 @WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
-@DeclareRoles("asdads")
 public class NewServlet extends HttpServlet {
 
     /**

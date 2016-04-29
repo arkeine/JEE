@@ -15,8 +15,6 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreatePackageLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{packageController.selected.id}" title="#{bundle.CreatePackageTitle_id}" required="true" requiredMessage="#{bundle.CreatePackageRequiredMessage_id}"/>
                     <h:outputLabel value="#{bundle.CreatePackageLabel_gatherdate}" for="gatherdate" />
                     <h:inputText id="gatherdate" value="#{packageController.selected.gatherdate}" title="#{bundle.CreatePackageTitle_gatherdate}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -31,7 +29,7 @@
                     <h:inputText id="isTransit" value="#{packageController.selected.isTransit}" title="#{bundle.CreatePackageTitle_isTransit}" required="true" requiredMessage="#{bundle.CreatePackageRequiredMessage_isTransit}"/>
                     <h:outputLabel value="#{bundle.CreatePackageLabel_bananatypeid}" for="bananatypeid" />
                     <h:selectOneMenu id="bananatypeid" value="#{packageController.selected.bananatypeid}" title="#{bundle.CreatePackageTitle_bananatypeid}" required="true" requiredMessage="#{bundle.CreatePackageRequiredMessage_bananatypeid}">
-                        <f:selectItems value="#{bananatypeController.itemsAvailableSelectOne}"/>
+                        <f:selectItems value="#{bananatypeController.itemsAvailableByName}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />

@@ -6,6 +6,8 @@ import facades.util.PaginationHelper;
 import facades.AddressFacade;
 
 import java.io.Serializable;
+import java.security.Principal;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -25,7 +27,7 @@ public class AddressController implements Serializable {
     private Address current;
     private DataModel items = null;
     @EJB
-    private facades.AddressFacade ejbFacade;
+    private facades.AddressFacade ejbFacadeAddress;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -41,7 +43,7 @@ public class AddressController implements Serializable {
     }
 
     private AddressFacade getFacade() {
-        return ejbFacade;
+        return ejbFacadeAddress;
     }
 
     public PaginationHelper getPagination() {
@@ -66,7 +68,7 @@ public class AddressController implements Serializable {
         recreateModel();
         return "List";
     }
-
+    
     public String prepareView() {
         current = (Address) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -81,11 +83,16 @@ public class AddressController implements Serializable {
 
     public String create() {
         try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            Principal p = context.getExternalContext().getUserPrincipal();
+            String name = p == null ? "":p.getName();
+            current.setUserid(name);
+            current.setId(0);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AddressCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured : "+e));
             return null;
         }
     }
@@ -181,11 +188,22 @@ public class AddressController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        return JsfUtil.getSelectItems(ejbFacadeAddress.findAll(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(ejbFacadeAddress.findAll(), true);
+    }
+
+    public SelectItem[] getItemsAvailableByName() {
+        List<Address> listAddress = ejbFacadeAddress.findAll();
+        SelectItem[] s = new SelectItem[listAddress.size()];
+        int i = 0;
+        for(Address a : listAddress)
+        {
+            s[i] = new SelectItem(a, a.getTown());
+        }
+        return s;
     }
 
     @FacesConverter(forClass = Address.class)
@@ -198,7 +216,7 @@ public class AddressController implements Serializable {
             }
             AddressController controller = (AddressController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "addressController");
-            return controller.ejbFacade.find(getKey(value));
+            return controller.ejbFacadeAddress.find(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {

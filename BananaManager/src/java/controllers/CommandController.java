@@ -81,6 +81,7 @@ public class CommandController implements Serializable {
 
     public String create() {
         try {
+            current.setId(0);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CommandCreated"));
             return prepareCreate();

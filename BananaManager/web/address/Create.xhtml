@@ -15,8 +15,6 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateAddressLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{addressController.selected.id}" title="#{bundle.CreateAddressTitle_id}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_id}"/>
                     <h:outputLabel value="#{bundle.CreateAddressLabel_street}" for="street" />
                     <h:inputText id="street" value="#{addressController.selected.street}" title="#{bundle.CreateAddressTitle_street}" />
                     <h:outputLabel value="#{bundle.CreateAddressLabel_number}" for="number" />
@@ -29,8 +27,6 @@
                     <h:inputText id="country" value="#{addressController.selected.country}" title="#{bundle.CreateAddressTitle_country}" />
                     <h:outputLabel value="#{bundle.CreateAddressLabel_distric}" for="distric" />
                     <h:inputText id="distric" value="#{addressController.selected.distric}" title="#{bundle.CreateAddressTitle_distric}" />
-                    <h:outputLabel value="#{bundle.CreateAddressLabel_userid}" for="userid" />
-                    <h:inputText id="userid" value="#{addressController.selected.userid}" title="#{bundle.CreateAddressTitle_userid}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{addressController.create}" value="#{bundle.CreateAddressSaveLink}" />

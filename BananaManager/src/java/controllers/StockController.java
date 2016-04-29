@@ -6,6 +6,7 @@ import facades.util.PaginationHelper;
 import facades.StockFacade;
 
 import java.io.Serializable;
+import java.security.Principal;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -81,6 +82,11 @@ public class StockController implements Serializable {
 
     public String create() {
         try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            Principal p = context.getExternalContext().getUserPrincipal();
+            String name = p == null ? "":p.getName();
+            current.setUserid(name);
+            current.setId(0);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("StockCreated"));
             return prepareCreate();
